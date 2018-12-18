@@ -21,7 +21,7 @@
         <div id="game">
             <iframe id="client_frame" frameborder="0" scrolling="yes"  src="{{url('/town')}}" style="overflow-y: auto; border: 0; width: 100%; height: 100%; background-color: black;">Je hebt een moderne browser nodig hiervoor</iframe>
         </div>
-        <iframe style="width: 0em; height: 0em;" src="https://www.youtube.com/embed/DEeAN471boQ?autoplay=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe style="width: 0em; height: 0em;" src="https://www.youtube.com/embed/DEeAN471boQ?autoplay=1&loop=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </body>
 
     <script>
@@ -32,13 +32,13 @@
         switch(rand)
         {
             case 1:
-                load_msg.html("Een poortwachter brengt je naar je Stad");
+                load_msg.html("De briefpost over je aankomst wordt verstuurd");
                 break;
             case 2:
-                load_msg.html("Je ziet de muren van je Stad al in de verte");
+                load_msg.html("De stadspoorten worden geopend");
                 break;
             case 3:
-                load_msg.html("Je hoort je Burgers juigen vanwege je aankomst");
+                load_msg.html("De vlaggen worden gehesen");
                 break;
             case 4:
                 load_msg.html("De touwbrug wordt neergebracht en de poorten slaan open");

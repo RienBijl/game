@@ -3,12 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use \App\Barrack;
+use \App\Town;
 use Illuminate\Support\Facades\Auth;
-use App\User;
-use App\Town;
-use App\Barrack;
 
-class TownController extends Controller
+class BarracksController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,12 +16,7 @@ class TownController extends Controller
      */
     public function index()
     {
-        if(Auth::user()->town == null)
-        {
-            return redirect("town/create");
-        } else {
-            return redirect("town/" .Auth::user()->town->id);
-        }
+        return abort(500);
     }
 
     /**
@@ -32,7 +26,7 @@ class TownController extends Controller
      */
     public function create()
     {
-        return view('town.create');
+        //
     }
 
     /**
@@ -43,17 +37,44 @@ class TownController extends Controller
      */
     public function store(Request $request)
     {
-        $town = new Town;
-        $town->user_id = Auth::user()->id;
-        $town->name = $request->name;
-        $town->level = 0;
+        $knights = $request->input("knights");
+        $archers = $request->input("archers");
+        $footmen = $request->input("footmen");
+
+        if($knights < 1 || $archers < 1 || $footmen < 1)
+            return redirect("town");
+
+        $gold = 0;
+        $gold = $gold + ($knights * 40);
+        $gold = $gold + ($archers * 30);
+        $gold = $gold + ($footmen * 20);
+
+        $food = 0;
+        $food = $food + ($knights * 60);
+        $food = $food + ($archers * 50);
+        $food = $food + ($footmen * 40);
+
+        $_gold = Auth::user()->town->gold;
+        $_food = Auth::user()->town->food;
+
+        if(($_gold < $gold) || $_food < $food)
+            return redirect("town");
+
+        $town = Town::find(Auth::user()->town->id);
+        $town->gold = $_gold - $gold;
+        $town->food = $_food - $food;
         $town->save();
 
-        $barrack = new Barrack;
-        $barrack->town_id = Auth::user()->town->id;
+        $barrack = Barrack::find($town->barrack->id);
+        $k = $barrack->knights;
+        $a = $barrack->archers;
+        $f = $barrack->footmen;
+        $barrack->knights = $k + $knights;
+        $barrack->archers = $a + $archers;
+        $barrack->footmen = $f + $footmen;
         $barrack->save();
 
-        return redirect("town/" .Auth::user()->town->id);
+        return redirect("barrack/" .Auth::user()->town->barrack->id);
     }
 
     /**
@@ -64,7 +85,8 @@ class TownController extends Controller
      */
     public function show($id)
     {
-        return view('town.show')->with('town', Town::find($id));
+        $barrack = Barrack::find($id);
+        return view("barracks.index");
     }
 
     /**
@@ -87,11 +109,6 @@ class TownController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $town = Town::find($id);
-        $town->gold = $town->gold + 3;
-        $town->food = $town->food + 2;
-        $town->save();
-        return abort(200);
     }
 
     /**

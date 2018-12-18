@@ -23,7 +23,8 @@ Route::group(['middleware' => 'auth'], function() {
     Middleware -> auth
     */
     Route::get('/home', function() { return redirect('/client'); });
-    Route::resource('town', 'TownController');
+    Route::resource('/town', 'TownController');
+    Route::resource('/barrack', 'BarracksController');
     Route::get('/map', 'MapController@index');
 
 });

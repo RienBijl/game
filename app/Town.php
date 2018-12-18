@@ -12,4 +12,9 @@ class Town extends Model
         return $this->belongsTo('App\User');
     }
 
+    public function barrack()
+    {
+        return $this->hasOne('\App\Barrack');
+    }
+
 }
