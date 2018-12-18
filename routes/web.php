@@ -15,11 +15,14 @@ Route::get('/', function () { return redirect('/login'); });
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function() {
-    
+
+    // Game
+    Route::get('/client', function() { return view('game2') ;});
+
     /*
     Middleware -> auth
     */
-    Route::get('/home', function() { return redirect('/town'); });
+    Route::get('/home', function() { return redirect('/client'); });
     Route::resource('town', 'TownController');
     Route::get('/map', 'MapController@index');
 

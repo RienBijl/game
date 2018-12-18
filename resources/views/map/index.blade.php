@@ -4,21 +4,36 @@
 
     <div class="container">
 
-        <div style="background-color: green; width: 100%; height: 40em;">
-            
-            <div style="margin-top: {{ rand(1, 30) }}em; margin-left: {{ rand(1, 30) }}em; width: 3em; height: 3em; background-color: grey; position: absolute;"
-            <?php $town1 = \App\Town::find(rand(1, App\Town::count())) ?>
-            data-toggle="tooltip" data-placement="top" title="{{ $town1->name }}"
-            onclick="location.href = '{{ url('town/' .$town1->id) }}'"
-            ></div>
-            <div style="margin-top: {{ rand(1, 30) }}em; margin-left: {{ rand(1, 30) }}em; width: 3em; height: 3em; background-color: grey; position: absolute;"
-            <?php $town2 = \App\Town::find(rand(1, App\Town::count())) ?>
-            onclick="location.href = '{{ url('town/' .$town2->id) }}'"
-            data-toggle="tooltip" data-placement="top" title="{{ $town2->name }}"
-            ></div>
+        <div class="rpgui-container framed fw">
+            <p>Een reiziger heeft je deze kaart gegeven, je mag hem lenen om een route naar een andere stad uit te stippelen. Hij wil hem hierna wel weer terug.</p>
+            <br><br>
+            <center><button onclick=' location.href="{{url('map')}}"' class="rpgui-button">Vraag een nieuwe kaart</button></center>
 
+        </div>
+        <br>
+        <div class="rpgui-container framed fw">
+        <div style="background-image: url({{ asset('img/map.jpg') }};  width: 100%; height: 45em;">
+
+            @for($i=0;$i<3;$i++)
+                <div class="">
+                    {{--<div class="tooltiptext">--}}
+                        {{--<b>{{$maps[$i]->name}}</b><br>Level: {{$maps[$i]->level}}<br><hr>Deze stad wordt bestuurd door {{$maps[$i]->user->name}}--}}
+                    {{--</div>--}}
+                    <div style="
+                        position: absolute;
+                        cursor: pointer;
+                        {{$locations[$i]}}
+                            "
+                         onclick="location.href = '{{url('town/' .$maps[$i]->id)}}'"
+                    >
+                        <center><img src="{{asset('img/town.png')}}" height="100em" alt=""></center>
+                        <p>{{$maps[$i]->name}}<br>Level: {{$maps[$i]->level}}</p>
+                    </div>
+                </div>
+            @endfor
+
+        </div>
         </div>
 
     </div>
-
 @endsection

@@ -48,7 +48,7 @@ class TownController extends Controller
         $town->level = 0;
         $town->save();
 
-        return redirect("town/" .Auth::user()->town);
+        return redirect("town/" .Auth::user()->town->id);
     }
 
     /**
