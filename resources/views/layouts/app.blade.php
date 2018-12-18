@@ -29,6 +29,8 @@
             @if(Auth::user()->town != null)
             <button onclick="location.href = '{{ url("town/" .Auth::user()->town->id) }}'" class="rpgui-button">{{Auth::user()->town->name}}</button>
             <button class="rpgui-button" onclick="location.href = '{{ url("map") }}'">Kaart</button>
+             <form style="display: inline;" action="{{route("logout")}}" method="post"> @csrf <button class="rpgui-button" type="submit">Uitloggen</button></form>
+
             @endif
 
         </div>
