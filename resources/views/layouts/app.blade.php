@@ -27,9 +27,17 @@
             <br>
         <div class="container">
             @if(Auth::user()->town != null)
-            <button onclick="location.href = '{{ url("town/" .Auth::user()->town->id) }}'" class="rpgui-button">{{Auth::user()->town->name}}</button>
-            <button class="rpgui-button" onclick="location.href = '{{ url("map") }}'">Kaart</button>
-             <form style="display: inline;" action="{{route("logout")}}" method="post"> @csrf <button class="rpgui-button" type="submit">Uitloggen</button></form>
+            
+            <div class="row">
+                <div class="col-md-10">
+                        <button onclick="location.href = '{{ url("town/" .Auth::user()->town->id) }}'" class="rpgui-button">{{Auth::user()->town->name}}</button>
+                        <button class="rpgui-button" onclick="location.href = '{{ url("map") }}'">Kaart</button>
+                         <form style="display: inline;" action="{{route("logout")}}" method="post"> @csrf <button class="rpgui-button" type="submit">Uitloggen</button></form>
+                </div>
+                <div class="col-md-2">
+                    <p>alpha 1.0</p>
+                </div>
+            </div>
 
             @endif
 

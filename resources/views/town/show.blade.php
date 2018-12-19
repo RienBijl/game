@@ -50,7 +50,7 @@
             @else
                 <div class="rpgui-container framed fw">
                     <h3>Actie uitvoeren</h3>
-                    <button class="rpgui-button">Aanvallen</button>
+                    <button class="rpgui-button" onclick="location.href = '{{ url('battle') }}/{{Auth::user()->town->id}}/{{$town->id}}'">Aanvallen</button>
                 </div>
             @endif
 

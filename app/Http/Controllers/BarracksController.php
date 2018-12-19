@@ -41,7 +41,7 @@ class BarracksController extends Controller
         $archers = $request->input("archers");
         $footmen = $request->input("footmen");
 
-        if($knights < 1 || $archers < 1 || $footmen < 1)
+        if($knights < 0 || $archers < 0 || $footmen < 0)
             return redirect("town");
 
         $gold = 0;

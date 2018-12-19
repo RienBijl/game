@@ -15,7 +15,7 @@ class Barrack extends Model
     {
         $knights = $this->knights * 3;
         $archers = $this->archers * 2;
-        $footmen = $this->footman * 1;
+        $footmen = $this->footmen * 1;
         return $knights + $archers + $footmen;
     }
 }

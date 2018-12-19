@@ -26,5 +26,6 @@ Route::group(['middleware' => 'auth'], function() {
     Route::resource('/town', 'TownController');
     Route::resource('/barrack', 'BarracksController');
     Route::get('/map', 'MapController@index');
+    Route::get('/battle/{offensive}/{defensive}', 'BattleController@attack');
 
 });
